@@ -1,15 +1,18 @@
 var spawn = require('child_process').spawn;
 var duplexer = require('duplexer');
 
-module.exports = function (cmd, args) {
+module.exports = function (cmd, args, opts) {
     if (Array.isArray(cmd)) {
+        opts = args;
         args = cmd.slice(1);
         cmd = cmd[0];
     }
     
-    var ps = spawn(cmd, args);
+    var ps = spawn(cmd, args, opts);
     var err = '';
-    ps.stderr.on('data', function (buf) { err += buf });
+    if (ps.stderr) {
+        ps.stderr.on('data', function (buf) { err += buf });
+    }
     
     ps.on('exit', function (code) {
         if (code === 0) return;
