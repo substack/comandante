@@ -1,5 +1,5 @@
-var through = require('through');
 var spawn = require('child_process').spawn;
+var duplexer = require('duplexer');
 
 module.exports = function (cmd, args) {
     if (Array.isArray(cmd)) {
@@ -13,9 +13,9 @@ module.exports = function (cmd, args) {
     
     ps.on('exit', function (code) {
         if (code === 0) return;
-        tr.emit('error', 'non-zero exit code ' + code + ': ' + err);
+        dup.emit('error', 'non-zero exit code ' + code + ': ' + err);
     });
     
-    var tr = ps.stdout.pipe(through());
-    return tr;
+    var dup = duplexer(ps.stdin, ps.stdout);
+    return dup;
 };
