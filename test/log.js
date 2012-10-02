@@ -2,7 +2,7 @@ var test = require('tap').test;
 var run = require('../');
 var through = require('through');
 
-test('log ok', function (t) {
+test('stdout capture', function (t) {
     t.plan(1);
     
     var data = '';
@@ -16,5 +16,15 @@ test('log ok', function (t) {
             );
         }
     );
-    var ps = run('git', [ 'log' ]).pipe(ws);
+    run('git', [ 'log' ]).pipe(ws);
+});
+
+test('stderr capture', function (t) {
+    t.plan(2);
+    
+    var ps = run('git', [ 'log' ], { cwd : '/tmp' });
+    ps.on('error', function (err) {
+        t.ok(/non-zero exit code/.test(err));
+        t.ok(/Not a git repository/.test(err));
+    });
 });
