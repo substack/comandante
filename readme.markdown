@@ -3,6 +3,8 @@
 Spawn commands returning a duplex stream. Emit stderr when the command exits
 with a non-zero code.
 
+[![build status](https://secure.travis-ci.org/substack/comandante.png)](http://travis-ci.org/substack/comandante)
+
 ## example
 
 ``` js
