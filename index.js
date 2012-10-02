@@ -14,7 +14,7 @@ module.exports = function (cmd, args, opts) {
         ps.stderr.on('data', function (buf) { err += buf });
     }
     
-    ps.on('exit', function (code) {
+    ps.on('close', function (code) {
         if (code === 0) return;
         dup.emit('error', new Error('non-zero exit code ' + code + ': ' + err));
     });
