@@ -20,5 +20,16 @@ module.exports = function (cmd, args, opts) {
     });
     
     var dup = duplexer(ps.stdin, ps.stdout);
+    
+    dup.stdin = ps.stdin;
+    dup.stderr = ps.stderr;
+    dup.stdout = ps.stdout;
+    dup.pid = ps.pid;
+    dup.kill = ps.kill.bind(ps);
+    
+    [ 'exit', 'close' ].forEach(function (name) {
+        ps.on(name, dup.emit.bind(dup, name));
+    });
+    
     return dup;
 };
