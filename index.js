@@ -13,7 +13,7 @@ module.exports = function (cmd, args) {
     
     ps.on('exit', function (code) {
         if (code === 0) return;
-        dup.emit('error', 'non-zero exit code ' + code + ': ' + err);
+        dup.emit('error', new Error('non-zero exit code ' + code + ': ' + err));
     });
     
     var dup = duplexer(ps.stdin, ps.stdout);
