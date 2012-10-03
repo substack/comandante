@@ -1,4 +1,4 @@
-# commandante
+# comandante
 
 Spawn commands returning a duplex stream. Emit stderr when the command exits
 with a non-zero code.
@@ -8,7 +8,7 @@ with a non-zero code.
 ## example
 
 ``` js
-var run = require('commandante');
+var run = require('comandante');
 run('git', [ 'log' ]).pipe(process.stdout);
 ```
 
@@ -41,10 +41,10 @@ Error: non-zero exit code 128: fatal: Not a git repository (or any of the parent
 # methods
 
 ``` js
-var commandante = require('commandante')
+var comandante = require('comandante')
 ```
 
-## commandante(cmd, args, opts={})
+## comandante(cmd, args, opts={})
 
 Spawn a new process like `require('child_process')`.spawn()`, except the return
 value is a duplex stream combining `stdout` and `stdin`.
