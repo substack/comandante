@@ -1,6 +1,6 @@
 {
     "name" : "comandante",
-    "version" : "0.0.0",
+    "version" : "0.0.1",
     "description" : "spawn() that returns a duplex stream and emits errors with stderr data on non-zero exit codes",
     "main" : "index.js",
     "bin" : {},

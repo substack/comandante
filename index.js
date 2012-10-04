@@ -16,7 +16,13 @@ module.exports = function (cmd, args, opts) {
     
     ps.on('close', function (code) {
         if (code === 0) return;
-        dup.emit('error', new Error('non-zero exit code ' + code + ': ' + err));
+        dup.emit('error', new Error(
+            'non-zero exit code ' + code
+            + (!opts || opts.showCommand !== false
+                ? '\n  while running: ' + cmd + ' ' + args.join(' ')
+                : ''
+            )
+            + '\n\n  ' + err));
     });
     
     var dup = duplexer(ps.stdin, ps.stdout);

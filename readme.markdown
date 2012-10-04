@@ -52,6 +52,10 @@ value is a duplex stream combining `stdout` and `stdin`.
 If the process exits with a non-zero status, emit an `'error'` event with the
 stderr data and the code in an informative message.
 
+If `opts.showCommand` is not `false`, show the actual command in the informative
+error message. If you are running a command with passwords in the command
+arguments make sure to set `showCommand` to `false`.
+
 # install
 
 With [npm](https://npmjs.org) do:
