@@ -46,7 +46,7 @@ var comandante = require('comandante')
 
 ## comandante(cmd, args, opts={})
 
-Spawn a new process like `require('child_process')`.spawn()`, except the return
+Spawn a new process like `require('child_process').spawn()`, except the return
 value is a duplex stream combining `stdout` and `stdin`.
 
 If the process exits with a non-zero status, emit an `'error'` event with the
